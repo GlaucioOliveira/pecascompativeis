@@ -40,7 +40,7 @@ namespace pecacompativel.api.Controllers
         public ActionResult<Peca> Create(Marca marca)
         {
             _marcaService.Create(marca);
-            return CreatedAtRoute("GetMarca", new { id = marca.Id.ToString() }, marc);
+            return CreatedAtRoute("GetMarca", new { id = marca.Id.ToString() }, marca);
         }
 
         [HttpDelete("{id:length(24)}")]

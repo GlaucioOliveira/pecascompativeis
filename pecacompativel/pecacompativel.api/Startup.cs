@@ -36,6 +36,7 @@ namespace pecacompativel.api
                 sp.GetRequiredService<IOptions<PecaCompativelDatabaseSettings>>().Value);
 
             services.AddSingleton<PecaService>();
+            services.AddSingleton<MarcaService>();
 
             services.AddControllers();
         }

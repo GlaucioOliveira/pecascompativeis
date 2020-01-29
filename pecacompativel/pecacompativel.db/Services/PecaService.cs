@@ -16,7 +16,7 @@ namespace pecacompativel.db.Services
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
 
-            _pecas = database.GetCollection<Peca>(settings.PecaCompativelCollectionName);
+            _pecas = database.GetCollection<Peca>(settings.PecaCollectionName);
         }
 
         public List<Peca> Get() =>
