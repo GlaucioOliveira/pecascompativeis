@@ -36,6 +36,12 @@ namespace pecacompativel.api.Controllers
             return peca;
         }
 
+        [HttpGet("ListaPopulares")]
+        public ActionResult<List<Marca>> ListaPopulares()
+        {
+            return _marcaService.Get().Take(6).ToList();
+        }
+
         [HttpPost]
         public ActionResult<Peca> Create(Marca marca)
         {

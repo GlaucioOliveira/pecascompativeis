@@ -22,6 +22,7 @@ namespace pecacompativel.db.Services
         public List<Marca> Get() =>
             _marcas.Find(Marca => true).ToList();
 
+
         public Marca Get(string id) =>
             _marcas.Find<Marca>(Marca => Marca.Id == id).FirstOrDefault();
 

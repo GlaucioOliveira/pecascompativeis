@@ -107,7 +107,7 @@ namespace pecacompativel.cli
             {
                 DatabaseName = "pecacompativel",
                 ConnectionString = "mongodb://localhost:27017",
-                PecaCompativelCollectionName = "pecacompativel"
+                PecaCollectionName = "pecacompativel"
             };
 
             pecadb = new PecaService(dbConnection);
@@ -116,7 +116,7 @@ namespace pecacompativel.cli
             {
                 DatabaseName = "pecacompativel",
                 ConnectionString = "mongodb://localhost:27017",
-                PecaCompativelCollectionName = "marca"
+                MarcaCollectionName = "marca"
             });
         }
     }
