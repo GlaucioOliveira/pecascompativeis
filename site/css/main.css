@@ -4,3 +4,6 @@
     right: 25px;
     display: none;
 }   
+
+[v-cloak] > * { display:none }
+[v-cloak]::before { content: "Carregando..." }
