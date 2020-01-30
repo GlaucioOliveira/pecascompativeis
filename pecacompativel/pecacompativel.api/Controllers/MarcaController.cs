@@ -39,7 +39,9 @@ namespace pecacompativel.api.Controllers
         [HttpGet("ListaPopulares")]
         public ActionResult<List<Marca>> ListaPopulares()
         {
-            return _marcaService.Get().Take(6).ToList();
+            List<string> MarcasPopulares = new List<string>() { "HONDA", "DAFRA", "YAMAHA", "SUZUKI", "KAWASAKI", "BMW" };
+
+            return _marcaService.Get().Where(x => MarcasPopulares.Contains(x.Nome)).ToList();
         }
 
         [HttpPost]
