@@ -24,26 +24,53 @@
   </div>
 <br/>
      <div class="container">       
-       <h5>Marcas e Modelos populares:</h5>
- 
-       <div id="app" v-cloak> <!-- Vue.JS App -->
+       <h4>Dafra</h4>
+      <br/>
+       <span id="app" v-cloak> <!-- Vue.JS App -->
 
-        <div class="card-deck p-3" v-for="deck in decks">
-          <div class="card" v-for="marca in marcasPopulares.slice(deck.start, deck.end)">
-            <div class="card-header text-white bg-secondary">
-              {{ marca.nome }}
+        <form class="form-inline">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Buscar</span>
             </div>
-            <ul v-for="modelo in marca.modelo.slice(0,5)" class="list-group list-group-flush">
-              <li class="list-group-item"><a href="dafra_next_250.html">{{ modelo.nome.substring(0,30) }}</a> <span class="badge badge-secondary float-right">15 Peças</span></li>
-            </ul>
-            <div class="card-footer">
-              <small class="text-muted"><a href="dafra.html">Ver Todos os Modelos da {{ marca.nome }}</a></small>
-            </div>            
-          </div>          
-        </div>
+            <input type="text" class="form-control" v-model="filtroTabela" placeholder="Modelo" aria-label="Modelo" aria-describedby="button-addon1">
+          </div>
+        </form>  
+        <br>
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Modelo</th>
+              <th scope="col">Ano</th>
+              <th scope="col"><!-- Botões de Ação --></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="modelo in modeloFiltro">
+              <td><strong>{{ modelo.nome }}</strong></td>
+              <td>
+                <span>{{ modelo.ano.join(', ') + "."}}</span>
+              </td>
+              <td class="text-right">
+                <a href="dafra_next_250.html"><button class="btn btn-md"><i class="fa fa-search"></i> <span class="badge badge-secondary"></span></button></a>                
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+
+        
+       <div>
+        <button type="button" onclick="javascript:history.back();" class="btn btn-secondary">Voltar</button>
+      </div>
        </div>
+
+      <br/>
   </div>
-<br/>
+
+
+
 
 <a id="back-to-top" href="#" class="btn btn-light btn-lg back-to-top" role="button"><i class="fas fa-chevron-up"></i></a>
 
@@ -54,6 +81,6 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/index.vue.js"></script>
+    <script src="js/dafra.vue.js"></script>
   </body>
 </html>

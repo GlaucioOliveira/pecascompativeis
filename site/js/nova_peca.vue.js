@@ -4,16 +4,15 @@ var app = new Vue({
       return {
       marcaSelecionada: [],
       modeloSelecionado: [],
-      marcasPopulares: null,
+      marcas: null,
       AnosModeloSelecionado: [],
-      //modelos: [],
-      decks: [{start: 0, end: 3}, {start: 3, end: 6}]
+      anoSelecionado: null,
     }
   },
   
     mounted () {
       axios.get("https://localhost:44300/marca")
-           .then(response => (this.marcasPopulares = response.data))
+           .then(response => (this.marcas = response.data))
     },
     
     methods: {
