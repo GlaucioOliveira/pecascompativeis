@@ -5,3 +5,5 @@
 Nas pesquisas, pude perceber que as comunidades e fórums são bem ativos em compartilhar meios alternativos de substituições de peças, por outras alternativas, de outras marcas.
 
 Esse projeto surgiu dessa necessidade, de atender uma demanda não suprida pela comunidade de Motociclistas.
+
+.
