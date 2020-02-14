@@ -38,6 +38,7 @@ namespace pecacompativel.api
             services.AddSingleton<PecaService>();
             services.AddSingleton<MarcaService>();
 
+            services.AddCors();
             services.AddControllers();
         }
 
@@ -53,12 +54,19 @@ namespace pecacompativel.api
             //{
             //    b.WithOrigins("http://127.0.0.1:5500/", "http://localhost/");
             //});
-            app.UseCors(option => option.AllowAnyOrigin());
-
-
+            //app.UseCors(x => x.AllowAnyHeader());
+            //app.UseCors(x => x.AllowAnyMethod());
+            //app.UseCors(option => option.AllowAnyOrigin());
+            
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(option => option
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        );
 
             app.UseAuthorization();
 

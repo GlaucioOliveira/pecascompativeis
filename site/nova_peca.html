@@ -83,14 +83,16 @@
             <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="" rows="2"  v-model="novaPeca.Observacao"></textarea>
         </div>
       </form>
-
+<!-- 
       <textarea  class="form-control" rows="5" cols="10">{{ novaPeca }}</textarea>
-      <textarea  class="form-control" rows="5" cols="10">{{ saida }}</textarea>
+      <textarea  class="form-control" rows="5" cols="10">{{ saida }}</textarea> -->
+    
+      <div>
+        <button type="button" onclick="javascript:history.back();" class="btn btn-secondary">Voltar</button>
+        <button type="button" class="btn btn-dark"  v-on:click="enviarPecaAlternativa">Salvar</button>
+      </div>      
     </div>
-    <div>
-      <button type="button" onclick="javascript:history.back();" class="btn btn-secondary">Voltar</button>
-      <button type="button" class="btn btn-dark"  v-on:click="enviarPecaAlternativa">Salvar</button>
-    </div>
+
     <br/>
 
 

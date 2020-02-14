@@ -40,16 +40,13 @@ var app = new Vue({
        },
 
        enviarPecaAlternativa: function() {
-        alert('teste');
-        this.saida = JSON.stringify(this.novaPeca);
-       
-        //  axios.post("https://localhost:44300/peca", {
-        //   body: JSON.stringify(this.novaPeca)
-        // })
-        // .then(response => {})
-        // .catch(e => {
-        //   //this.errors.push(e)
-        // })
+         //enviar post passando como parâmetor o objeto this.novaPeca;
+         //o axios converte o objeto para string (JSON.stringify) automaticamente.
+         axios.post("https://localhost:44300/peca", this.novaPeca)
+        .then(response => {})
+        .catch(e => {
+          //this.errors.push(e)
+        })
 
        }
     }

@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using pecacompativel.db.Services;
 using pecacompativel.db.Models;
+using Microsoft.AspNetCore.Cors;
 
 namespace pecacompativel.api.Controllers
 {
+    //[DisableCors]
     [ApiController]
     [Route("[controller]")]
     public class PecaController : ControllerBase
@@ -39,6 +41,9 @@ namespace pecacompativel.api.Controllers
         [HttpPost]
         public ActionResult<Peca> Create(Peca peca)
         {
+            peca.DataCriacao = DateTime.Now;
+            peca.DataAlteracao = peca.DataCriacao;
+
             _pecaService.Create(peca);
             return CreatedAtRoute("GetPeca", new { id = peca.Id.ToString() }, peca);
         }
