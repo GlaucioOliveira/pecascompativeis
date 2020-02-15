@@ -24,9 +24,10 @@
   </div>
 <br/>
      <div class="container">       
-       <h4>Dafra</h4>
-      <br/>
+
        <span id="app" v-cloak> <!-- Vue.JS App -->
+        <h4>{{ marca.nome }}</h4>
+        <br/>
 
         <form class="form-inline">
           <div class="input-group">
@@ -53,7 +54,7 @@
                 <span>{{ modelo.ano.join(', ') + "."}}</span>
               </td>
               <td class="text-right">
-                <a href="dafra_next_250.html"><button class="btn btn-md"><i class="fa fa-search"></i> <span class="badge badge-secondary"></span></button></a>                
+                <a :href="'dafra_next_250.html?id=' + modelo.id"><button class="btn btn-md"><i class="fa fa-search"></i> <span class="badge badge-secondary"></span></button></a>                
               </td>
             </tr>
 
@@ -81,6 +82,6 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/dafra.vue.js"></script>
+    <script src="js/marca.vue.js"></script>
   </body>
 </html>

@@ -1,7 +1,7 @@
 17:40 14/02/2020
 
-- passar o ID da marca onde está sendo cadastrado uma peça alternativa;
-- alterar carga para salvar ID das marcas no MongoDB;
+- passar o ID da marca onde está sendo cadastrado uma peça alternativa;		OK
+- alterar carga para salvar ID das marcas no MongoDB;				OK
 - na tela de lista da marca, listar as peças alternativas cadastradas;
 - criar estrutura social (curtidas, comentários) para uma marca;
 

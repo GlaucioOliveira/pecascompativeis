@@ -40,5 +40,11 @@ namespace pecacompativel.db.Services
 
         public void Remove(string id) =>
             _marcas.DeleteOne(Marca => Marca.Id == id);
+
+        public void RemoveAll()
+        {
+            //remove everything
+            _marcas.DeleteMany(x => x.Id == null || x.Id != null);
+        }
     }
 }

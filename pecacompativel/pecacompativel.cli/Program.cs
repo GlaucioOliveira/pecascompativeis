@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.IO;
 using System.Collections.Generic;
 using pecacompativel.cli.Models;
+using MongoDB.Bson;
 
 namespace pecacompativel.cli
 {
@@ -14,6 +15,8 @@ namespace pecacompativel.cli
         static PecaCompativelDatabaseSettings dbConnection;
         static PecaService pecadb;
         static MarcaService marcadb;
+        static ModeloService modelodb;
+
         #endregion
 
         static void Main(string[] args)
@@ -22,7 +25,12 @@ namespace pecacompativel.cli
 
             Console.WriteLine("Peça Compativel - CLI - v0.0.1");
 
+            //processa as marcas, modelos e anos do JSON na pasta DUMP/
             var listaMarcas = pegaJSONProcessado();
+
+            //apaga todas as marcas e modelos cadastrados.
+            marcadb.RemoveAll();
+            modelodb.RemoveAll();
 
             foreach (var item in listaMarcas)
             {
@@ -35,15 +43,36 @@ namespace pecacompativel.cli
 
                 foreach (var modelo in item.Value)
                 {
+                    Modelo novoModelo = new Modelo()
+                    {
+                        Nome = modelo.Modelo.Trim(),
+                        Ano = modelo.Ano,
+                        MarcaId = marca.Id,
+                        MarcaNome = marca.Nome
+                    };
+
+                    //cadastra no banco um novo modelo.
+                    modelodb.Create(novoModelo);
+
                     marca.Modelo.Add(new Modelo()
                     {
-                         Nome = modelo.Modelo.Trim(),
-                         Ano = modelo.Ano
+                        Id = novoModelo.Id,
+                        Nome = modelo.Modelo.Trim(),
+                        Ano = modelo.Ano
                     });
                 }
-                
+
                 //cadastro de marcas;
                 marcadb.Create(marca);
+
+                //TODO: Refatorar esse código. tá bem amador...
+                foreach (var modelo in marca.Modelo)
+                {
+                    var modeloParaEditar = modelodb.Get(modelo.Id);
+                    modeloParaEditar.MarcaId = marca.Id;
+
+                    modelodb.Update(modeloParaEditar.Id, modeloParaEditar);
+                }
             }
 
             Console.WriteLine("\n> Pressione uma Tecla para Encerrar... ");
@@ -101,6 +130,9 @@ namespace pecacompativel.cli
             return listaAnoModelo;
         }
 
+        /// <summary>
+        /// Carrega os services para manipular os dados no banco de dados.
+        /// </summary>
         static void carregaServices()
         {
             dbConnection = new PecaCompativelDatabaseSettings()
@@ -117,6 +149,13 @@ namespace pecacompativel.cli
                 DatabaseName = "pecacompativel",
                 ConnectionString = "mongodb://localhost:27017",
                 MarcaCollectionName = "marca"
+            });
+
+            modelodb = new ModeloService(new PecaCompativelDatabaseSettings()
+            {
+                DatabaseName = "pecacompativel",
+                ConnectionString = "mongodb://localhost:27017",
+                ModeloCollectionName = "modelo"
             });
         }
     }

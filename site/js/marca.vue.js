@@ -6,7 +6,11 @@ var app = new Vue({
     },
   
     mounted () {
-      axios.get("https://localhost:44300/marca/5e3204180d73975b582382f6")
+      let uri = window.location.search.substring(1); 
+      let params = new URLSearchParams(uri);
+      //console.log(params.get("id"));
+
+      axios.get("https://localhost:44300/marca/" + params.get("id"))
            .then(response => (this.marca = response.data))
     },
 

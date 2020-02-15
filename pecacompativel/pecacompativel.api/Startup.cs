@@ -37,6 +37,7 @@ namespace pecacompativel.api
 
             services.AddSingleton<PecaService>();
             services.AddSingleton<MarcaService>();
+            services.AddSingleton<ModeloService>();
 
             services.AddCors();
             services.AddControllers();

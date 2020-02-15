@@ -16,5 +16,8 @@ namespace pecacompativel.db.Models
 
         public string Nome { get; set; }
         public List<string> Ano { get; set; }
+
+        public string MarcaNome { get; set; }
+        public string MarcaId { get; set; }
     }
 }

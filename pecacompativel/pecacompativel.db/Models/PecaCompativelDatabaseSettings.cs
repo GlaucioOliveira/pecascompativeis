@@ -9,6 +9,8 @@ namespace pecacompativel.db.Models
     {
         public string PecaCollectionName { get; set; }
         public string MarcaCollectionName { get; set; }
+        public string ModeloCollectionName { get; set; }
+
         public string ConnectionString { get; set; }
         public string DatabaseName { get; set; }
     }
@@ -17,6 +19,7 @@ namespace pecacompativel.db.Models
     {
         string PecaCollectionName { get; set; }
         string MarcaCollectionName { get; set; }
+        string ModeloCollectionName { get; set; }
         string ConnectionString { get; set; }
         string DatabaseName { get; set; }
     }
