@@ -28,7 +28,6 @@
        <span id="app" v-cloak> <!-- Vue.JS App -->
         <h4>{{ marca.nome }}</h4>
         <br/>
-
         <form class="form-inline">
           <div class="input-group">
             <div class="input-group-prepend">
@@ -54,14 +53,11 @@
                 <span>{{ modelo.ano.join(', ') + "."}}</span>
               </td>
               <td class="text-right">
-                <a :href="'dafra_next_250.html?id=' + modelo.id"><button class="btn btn-md"><i class="fa fa-search"></i> <span class="badge badge-secondary"></span></button></a>                
+                <a :href="'modelo.html?id=' + modelo.id"><button class="btn btn-md"><i class="fa fa-search"></i> <span class="badge badge-secondary"></span></button></a>                
               </td>
             </tr>
-
           </tbody>
-        </table>
-
-        
+        </table>       
        <div>
         <button type="button" onclick="javascript:history.back();" class="btn btn-secondary">Voltar</button>
       </div>
@@ -69,9 +65,6 @@
 
       <br/>
   </div>
-
-
-
 
 <a id="back-to-top" href="#" class="btn btn-light btn-lg back-to-top" role="button"><i class="fas fa-chevron-up"></i></a>
 

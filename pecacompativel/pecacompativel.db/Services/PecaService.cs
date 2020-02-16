@@ -22,6 +22,11 @@ namespace pecacompativel.db.Services
         public List<Peca> Get() =>
             _pecas.Find(peca => true).ToList();
 
+        public List<Peca> ListarPecasAlternativas(string ModeloOrigem)
+        {
+            return _pecas.Find(x => x.ModeloOrigem == ModeloOrigem).ToList();
+        }
+
         public Peca Get(string id) =>
             _pecas.Find<Peca>(peca => peca.Id == id).FirstOrDefault();
 

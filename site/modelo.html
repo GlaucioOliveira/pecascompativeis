@@ -9,6 +9,7 @@
     <title>Peça Compativel</title>
   </head>
   <body>
+    <span id="breadcrumb"> <!-- Vue.JS App -->    
     <div class="sticky-top">
     <nav class="navbar navbar-dark bg-dark">
       <a class="navbar-brand" href="index.html"><i class="fa fa-wrench"></i> Peça Compatível</a>
@@ -23,7 +24,6 @@
       </form>
     </nav>
   
-    <span id="breadcrumb"> <!-- Vue.JS App -->
       <!-- {{ modelo }} -->
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -33,8 +33,9 @@
         <li class="breadcrumb-item active" aria-current="page">{{ modelo.nome }}</li>
       </ol>
     </nav>
-    </span>
   </div>
+
+  <!-- {{pecasAlternativas}} -->
 
      <div class="container">
 
@@ -51,85 +52,32 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <!-- <th scope="row">1</th> -->
-          <td>Filtro de Ar Esportivo</td>
-          <td>Honda Twister (N/E)</td>
+
+        <!-- [ { "id": "5e489a01f5e1034d10a2915d", "marca": "ADLY", "modelo": "ATV 50", "ano": "2000", "pecaNome": "Filtro de Gasolina", "observacao": "filtro de gasolina.", "dataCriacao": "2020-02-16T01:25:21.745Z", "dataAlteracao": "2020-02-16T01:25:21.745Z", "modeloOrigem": "5e483e066b8aa84b7c17204a" } ]
+         -->
+        <tr v-for="pecaAlternativa in pecasAlternativas">
+          <td>{{ pecaAlternativa.pecaNome }}</td>
+          <td>{{ pecaAlternativa.marca + ' - ' + pecaAlternativa.modelo + ' (' + pecaAlternativa.ano + ')' }}</td><!-- Honda Twister (N/E) --->
           <td class="text-right">
             <button class="btn btn-md"><i class="fa fa-thumbs-up"></i> <span class="badge badge-secondary">88</span></button>
             <button class="btn btn-md"><i class="fa fa-thumbs-down"></i> <span class="badge badge-secondary">15</span></button>
             <button class="btn btn-md" data-toggle="collapse" data-target="#collapseExample" ><i class="fa fa-comment"></i> <span class="badge badge-secondary">5</span></button>
           </td>
-        </tr>
-
-        <tr>
-          <td>Filtro de Gasolina</td>
-          <td>Honda Titan Mix (N/E)</td>
-          <td class="text-right">
-            <button class="btn btn-md"><i class="fa fa-thumbs-up"></i> <span class="badge badge-secondary">78</span></button>
-            <button class="btn btn-md"><i class="fa fa-thumbs-down"></i> <span class="badge badge-secondary">2</span></button>
-            <button class="btn btn-md"><i class="fa fa-comment"></i> <span class="badge badge-secondary">5</span></button>
-          </td>
-        </tr>
-        <tr>
-          <td>Disco de Embreagem</td>
-          <td>Honda Falcon (N/E)</td>
-          <td class="text-right">
-            <button class="btn btn-md"><i class="fa fa-thumbs-up"></i> <span class="badge badge-secondary">42</span></button>
-            <button class="btn btn-md"><i class="fa fa-thumbs-down"></i> <span class="badge badge-secondary">5</span></button>
-            <button class="btn btn-md"><i class="fa fa-comment"></i> <span class="badge badge-secondary">5</span></button>
-          </td>
-        </tr>
-        <tr>
-          <td>Filtro de Óleo (2)</td>
-          <td>Suzuki DRZ 400 (2000-2009)</td>
-          <td class="text-right">
-            <button class="btn btn-md"><i class="fa fa-thumbs-up"></i> <span class="badge badge-secondary">12</span></button>
-            <button class="btn btn-md"><i class="fa fa-thumbs-down"></i> <span class="badge badge-secondary">1</span></button>
-            <button class="btn btn-md"><i class="fa fa-comment"></i> <span class="badge badge-secondary">2</span></button>
-          </td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>Kawasaki KLX 400R (2002/2003)</td>
-          <td class="text-right">
-            <button class="btn btn-md"><i class="fa fa-thumbs-up"></i> <span class="badge badge-secondary">3</span></button>
-            <button class="btn btn-md"><i class="fa fa-thumbs-down"></i> <span class="badge badge-secondary">0</span></button>
-            <button class="btn btn-md"><i class="fa fa-comment"></i> <span class="badge badge-secondary">0</span></button>
-          </td>
-        </tr>                
-        <tr>
-          <td>Caixa de Direção (2)</td>
-          <td>CG Titan 125 (1979-1999)</td>
-          <td class="text-right">
-            <button class="btn btn-md"><i class="fa fa-thumbs-up"></i> <span class="badge badge-secondary">1</span></button>
-            <button class="btn btn-md"><i class="fa fa-thumbs-down"></i> <span class="badge badge-secondary">0</span></button>
-            <button class="btn btn-md"><i class="fa fa-comment"></i> <span class="badge badge-secondary">0</span></button>
-          </td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>Honda Twister (N/E)</td>
-          <td class="text-right">
-            <button class="btn btn-md"><i class="fa fa-thumbs-up"></i> <span class="badge badge-secondary">0</span></button>
-            <button class="btn btn-md"><i class="fa fa-thumbs-down"></i> <span class="badge badge-secondary">1</span></button>
-            <button class="btn btn-md"><i class="fa fa-comment"></i> <span class="badge badge-secondary">0</span></button>
-          </td>
-        </tr>    
+        </tr>   
       </tbody>
     </table>
 
     <div>
       <button type="button" onclick="javascript:history.back();" class="btn btn-secondary">Voltar</button>
 
-      <a href="nova_peca.html">
+      <a :href="'nova_peca.html?id=' + modelo.id">
       <button type="button" class="btn btn-dark">Adicionar Peça Alternativa</button>
     </a>
     </div>
     <br/>
   </div>
 
-  
+</span>
   <a id="back-to-top" href="#" class="btn btn-light btn-lg back-to-top" role="button"><i class="fas fa-chevron-up"></i></a>
 
     

@@ -34,7 +34,7 @@
               {{ marca.nome }}
             </div>
             <ul v-for="modelo in marca.modelo.slice(0,5)" class="list-group list-group-flush">
-              <li class="list-group-item"><a href="dafra_next_250.html">{{ modelo.nome.substring(0,30) }}</a> <span class="badge badge-secondary float-right">15 Peças</span></li>
+              <li class="list-group-item"><a :href="'modelo.html?id=' + modelo.id">{{ modelo.nome.substring(0,30) }}</a> <span class="badge badge-secondary float-right">15 Peças</span></li>
             </ul>
             <div class="card-footer">
               <small class="text-muted"><a :href="'marca.html?id=' + marca.id">Ver Todos os Modelos da {{ marca.nome }}</a></small>

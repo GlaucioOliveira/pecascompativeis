@@ -9,6 +9,8 @@
     <title>Peça Compativel</title>
   </head>
   <body>
+
+    <div id="app" v-cloak> <!-- Vue.JS App -->
     <div class="sticky-top">
     <nav class="navbar navbar-dark bg-dark">
       <a class="navbar-brand" href="index.html"><i class="fa fa-wrench"></i> Peça Compatível</a>
@@ -26,15 +28,14 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index.html">Início</a></li>
         <li class="breadcrumb-item"><a href="#">Moto</a></li>
-        <li class="breadcrumb-item"><a href="#">Dafra</a></li>
-        <li class="breadcrumb-item" aria-current="page"><a href="dafra_next_250.html">Next 250</a></li>
+        <li class="breadcrumb-item"><a :href="'marca.html?id=' + modelo.marcaId">{{ modelo.marcaNome }}</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a :href="'modelo.html?id=' + modelo.id">{{ modelo.nome }}</a></li>
         <li class="breadcrumb-item active" aria-current="page">Cadastrar Peça</li>
       </ol>
     </nav>
   </div>
 
   <div class="container">
-    <div id="app" v-cloak> <!-- Vue.JS App -->
       <form>   
         <div class="form-group">
             <label for="exampleFormControlSelect1">Marca</label>
@@ -89,20 +90,19 @@
     
       <div>
         <button type="button" onclick="javascript:history.back();" class="btn btn-secondary">Voltar</button>
-        <button type="button" class="btn btn-dark"  v-on:click="enviarPecaAlternativa">Salvar</button>
+        <button type="button" class="btn btn-dark" v-if="!enviado" v-on:click="enviarPecaAlternativa"><i class="fa fa-check" v-if="enviado && redirecionando"></i> Salvar</button>
+        <button class="btn btn-dark" type="button" disabled v-if="enviado">
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          Salvando...
+        </button>
       </div>      
     </div>
-
     <br/>
-
-
   </div>
 
   
   <a id="back-to-top" href="#" class="btn btn-light btn-lg back-to-top" role="button"><i class="fas fa-chevron-up"></i></a>
     
-  
-
   </textarea>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

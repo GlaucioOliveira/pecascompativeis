@@ -2,8 +2,11 @@ var app = new Vue({
     el: '#app',
     data: function() {
       return {
+      enviado: false,
+      redirecionando: false,
       marcaSelecionada: [],
       modeloSelecionado: [],
+      modelo: [],
       marcas: null,
       AnosModeloSelecionado: [],
       anoSelecionado: null,
@@ -11,6 +14,7 @@ var app = new Vue({
       novaPeca: {
         Marca: '',
         Modelo: '',
+        ModeloOrigem: '',
         Ano: '',
         PecaNome: '',
         NecessitaAdaptacao: false,
@@ -20,8 +24,14 @@ var app = new Vue({
   },
   
     mounted () {
+      let uri = window.location.search.substring(1); 
+      let params = new URLSearchParams(uri);
+
       axios.get("https://localhost:44300/marca")
-           .then(response => (this.marcas = response.data))
+           .then(response => (this.marcas = response.data));
+
+           axios.get("https://localhost:44300/modelo/" + params.get("id"))
+           .then(response => (this.modelo = response.data));
     },
     
     methods: {
@@ -42,8 +52,13 @@ var app = new Vue({
        enviarPecaAlternativa: function() {
          //enviar post passando como parâmetor o objeto this.novaPeca;
          //o axios converte o objeto para string (JSON.stringify) automaticamente.
+         this.enviado = true;
+         this.novaPeca.ModeloOrigem = this.modelo.id;
          axios.post("https://localhost:44300/peca", this.novaPeca)
-        .then(response => {})
+        .then(response => {
+          this.redirecionando = true;
+          window.location.href = "http://127.0.0.1:5500/modelo.html?id=" + this.modelo.id;
+        })
         .catch(e => {
           //this.errors.push(e)
         })

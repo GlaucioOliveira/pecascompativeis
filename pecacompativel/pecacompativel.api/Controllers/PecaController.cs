@@ -38,6 +38,12 @@ namespace pecacompativel.api.Controllers
             return peca;
         }
 
+        [HttpGet("ListarPecasAlternativas/{modelo}")]
+        public ActionResult<List<Peca>> ListarPecasAlternativas(string modelo)
+        {
+            return _pecaService.ListarPecasAlternativas(modelo);
+        }
+
         [HttpPost]
         public ActionResult<Peca> Create(Peca peca)
         {
