@@ -3,5 +3,5 @@
 - passar o ID da marca onde está sendo cadastrado uma peça alternativa;		OK
 - alterar carga para salvar ID das marcas no MongoDB;				OK
 - na tela de lista da marca, listar as peças alternativas cadastradas;		OK
-- criar estrutura social (curtidas, comentários) para uma marca;
+- criar estrutura social (curtidas, comentários) para uma marca;		
 

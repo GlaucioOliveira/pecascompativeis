@@ -2,8 +2,15 @@
 @model pecacompativel.web.CadastrarPecaModel
 @{
     ViewData["Title"] = "- Cadastrar Peça Alternativa";
-    Layout = "~/Pages/Shared/_Layout.cshtml";
+    Layout = "~/Pages/Shared/_LayoutModal.cshtml";
 }
+
+@*@section breadcrumb
+{
+    <li class="breadcrumb-item">{{ modelo.marcaNome }}</li>
+    <li class="breadcrumb-item">{{ modelo.nome }}</li>
+    <li class="breadcrumb-item active" aria-current="page">Cadastrar Peça</li>
+}*@
 
 <div id="app" class="container" v-cloak>
     <form>

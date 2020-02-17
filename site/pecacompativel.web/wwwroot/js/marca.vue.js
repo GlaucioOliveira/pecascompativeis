@@ -25,4 +25,18 @@
             }
         }
     }
-})
+});
+
+//TODO: refatorar essa parte do código... duas requisções na mesma API...
+var appBreadcrumb = new Vue({
+    el: '#breadcrumb',
+    data: {
+        marca: []
+    },
+
+    mounted() {
+        var id = IdPagina();
+        axios.get("https://localhost:44300/marca/" + id)
+            .then(response => (this.marca = response.data));
+    }
+});

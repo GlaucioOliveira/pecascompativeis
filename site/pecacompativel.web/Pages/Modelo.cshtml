@@ -5,13 +5,15 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<!-- Falta colocar o breadcrumb... -->
+@section breadcrumb
+{
+    <li class="breadcrumb-item">{{ modelo.marcaNome }}</li>
+    <li class="breadcrumb-item active" aria-current="page">{{ modelo.nome }}</li>
+}
+
 <div id="app" class="container" v-cloak>
     <h3>{{ modelo.marcaNome + ' ' + modelo.nome }}</h3>
-    <!-- <div class="text-center">
-       <img src="next250.png" class="img-fluid rounded" alt="Dafra - Next 250">
-       </div>
-    -->
+
     <table class="table table-striped" a v-if="pecasAlternativas && pecasAlternativas.length > 0">
         <thead>
             <tr>
@@ -45,15 +47,85 @@
     </div>
     <div>
         <button type="button" onclick="javascript:history.back();" class="btn btn-secondary">Voltar</button>
-        @*mo-{id}/{marca}/{modelo}/peca-alternativa*@
-        <a v-if="modelo.marcaNome" :href="'/mo-' + modelo.id + '/' + modelo.marcaNome + '/' + modelo.nome + '/peca-alternativa'">
-            <button type="button" class="btn btn-dark">Adicionar Peça Alternativa</button>
-        </a>
+        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalCadastro">Cadastrar Peça</button>
     </div>
     <br />
 </div>
 
+<!-- Modal Cadastrar Peça Alternativa-->
+<div id="cadastro">
+    <div class="modal fade" id="modalCadastro" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Cadastrar Peça</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Marca</label>
+                            <select class="form-control" id="exampleFormControlSelect1" v-model="marcaSelecionada" @@change="atualizaReferencias">
+                                <option v-for="(item, index) in marcas" :value="item">{{ item.nome }}</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Modelo</label>
+                            <select class="form-control" id="exampleFormControlSelect1" v-model="modeloSelecionado" @@change="atualizaReferenciasAnos">
+                                <option v-for="(modelo, index) in marcaSelecionada.modelo" :value="modelo">{{ modelo.nome }}</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Ano</label>
+                            <select class="form-control" id="exampleFormControlSelect1" v-model="anoSelecionado" @@change="atualizaAnoSelecionado">
+                                <option></option>
+                                <option v-for="ano in AnosModeloSelecionado" :value="ano">{{ ano }}</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Peça</label>
+                            <select class="form-control" id="exampleFormControlSelect1" v-model="novaPeca.PecaNome">
+                                <option selected></option>
+                                <option>Filtro de Ar Esportivo</option>
+                                <option>Filtro de Gasolina</option>
+                                <option>Disco de Embreagem</option>
+                                <option>Filtro de Óleo</option>
+                                <option>Caixa de Direção</option>
+                                <option>Suspensão Dianteira</option>
+                                <option>Suspensão Traseira</option>
+                            </select>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="chkNecessitaAdaptacao" v-model="novaPeca.NecessitaAdaptacao">
+                            <label for="chkNecessitaAdaptacao">Necessita de Adaptação (N/A)</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Observação</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="" rows="2" v-model="novaPeca.Observacao"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                    <button type="button" class="btn btn-dark" v-if="!enviado" v-on:click="enviarPecaAlternativa"><i class="fa fa-check" v-if="enviado && redirecionando"></i> Salvar</button>
+                    <button class="btn btn-dark" type="button" disabled v-if="enviado">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Salvando...
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Cadastrar Peça Alternativa-->
 @section Scripts
 {
     <script src="~/js/modelo.vue.js" asp-append-version="true"></script>
+    <script src="~/js/cadastrar-peca.vue.js" asp-append-version="true"></script>
 }

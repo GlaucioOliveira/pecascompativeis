@@ -12,7 +12,7 @@
     <div class="sticky-top">
         <nav class="navbar navbar-dark bg-dark">
             <a class="navbar-brand" href="/"><i class="fa fa-wrench"></i> Peça Compatível</a>
-            <form class="form-inline">
+            <form class="form-inline" >
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Buscar</span>
@@ -20,6 +20,14 @@
                     <input type="text" class="form-control" placeholder="Moto/Modelo/Peça" aria-label="Moto/Modelo/Peça" aria-describedby="button-addon1">
                 </div>
             </form>
+        </nav>
+
+        <nav aria-label="breadcrumb" id="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Início</a></li>
+                <li class="breadcrumb-item">Moto</li>
+                @RenderSection("breadcrumb", required: false)
+            </ol>
         </nav>
     </div>
     <br />
@@ -30,6 +38,7 @@
     </div>
 
     <footer class="border-top footer text-muted">
+        <br/>
         <div class="container">
             &copy; @DateTime.Now.Year - Peça Compatível - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>

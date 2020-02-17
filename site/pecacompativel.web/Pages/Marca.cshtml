@@ -5,6 +5,11 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
+@section breadcrumb
+{
+    <li class="breadcrumb-item active" aria-current="page">{{ marca.nome }}</li>
+}
+
 <!-- Falta colocar o breadcrumb... -->
 <div class="container">
     <div id="app" v-cloak>

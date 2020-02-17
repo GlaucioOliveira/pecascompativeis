@@ -1,5 +1,5 @@
-﻿var app = new Vue({
-    el: '#app',
+﻿var appCadastro = new Vue({
+    el: '#cadastro',
     data: function () {
         return {
             enviado: false,
@@ -48,6 +48,25 @@
             this.novaPeca.Ano = this.anoSelecionado;
         },
 
+        limpaFormulario: function () {
+            this.marcaSelecionada = [];
+            this.modeloSelecionado = [];
+            this.anoSelecionado = null;
+
+            this.novaPeca = {
+                Marca: '',
+                Modelo: '',
+                ModeloOrigem: '',
+                Ano: '',
+                PecaNome: '',
+                NecessitaAdaptacao: false,
+                Observacao: ''
+            };
+
+            this.enviado = false;
+            this.redirecionando = false;
+            $('#modalCadastro').modal('hide');
+        },
         enviarPecaAlternativa: function () {
             //enviar post passando como parâmetor o objeto this.novaPeca;
             //o axios converte o objeto para string (JSON.stringify) automaticamente.
@@ -57,7 +76,9 @@
                 .then(response => {
                     this.redirecionando = true;
                     //window.location.href = "http://127.0.0.1:5500/modelo.html?id=" + this.modelo.id;
-                    history.back(); //TODO: Melhorar...
+                    app.atualizaListaPecasAlternativas();
+
+                    this.limpaFormulario();
                 })
                 .catch(e => {
                     //this.errors.push(e)
@@ -71,3 +92,18 @@
         }
     }
 });
+
+
+////TODO: refatorar essa parte do código... duas requisções na mesma API...
+//var appBreadcrumb = new Vue({
+//    el: '#breadcrumb',
+//    data: {
+//        modelo: []
+//    },
+
+//    mounted() {
+//        var id = IdPagina();
+//        axios.get("https://localhost:44300/modelo/" + id)
+//            .then(response => (this.modelo = response.data));
+//    }
+//});
