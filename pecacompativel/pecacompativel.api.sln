@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "pecacompativel.api", "pecac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "pecacompativel.db", "pecacompativel.db\pecacompativel.db.csproj", "{75D562A1-8928-43CC-B037-44591C8790A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pecacompativel.cli", "pecacompativel.cli\pecacompativel.cli.csproj", "{EC3C0080-E5E8-48B1-B662-9DB4A9273E73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "pecacompativel.cli", "pecacompativel.cli\pecacompativel.cli.csproj", "{EC3C0080-E5E8-48B1-B662-9DB4A9273E73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

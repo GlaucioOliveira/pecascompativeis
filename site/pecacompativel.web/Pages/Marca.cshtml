@@ -1,0 +1,53 @@
+﻿@page
+@model pecacompativel.web.MarcaModel
+@{
+    ViewData["Title"] = "- Marcas";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<!-- Falta colocar o breadcrumb... -->
+<div class="container">
+    <div id="app" v-cloak>
+        <!-- Vue.JS App -->
+        <h4>{{ marca.nome }}</h4>
+        <br />
+        <form class="form-inline">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Buscar</span>
+                </div>
+                <input type="text" class="form-control" v-model="filtroTabela" placeholder="Modelo" aria-label="Modelo" aria-describedby="button-addon1">
+            </div>
+        </form>
+        <br>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Ano</th>
+                    <th scope="col"><!-- Botões de Ação --></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="modelo in modeloFiltro">
+                    <td><strong>{{ modelo.nome }}</strong></td>
+                    <td>
+                        <span>{{ modelo.ano.join(', ') + "."}}</span>
+                    </td>
+                    <td class="text-right">
+                        <a :href="'/mo-' + modelo.id + '/' + marca.nome.toLowerCase() + '/' + modelo.nome.toLowerCase().replace(' ','-')"><button class="btn btn-md"><i class="fa fa-search"></i> <span class="badge badge-secondary"></span></button></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <button type="button" onclick="javascript:history.back();" class="btn btn-secondary">Voltar</button>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/js/marca.vue.js" asp-append-version="true"></script>
+}

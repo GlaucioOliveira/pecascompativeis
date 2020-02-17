@@ -1,0 +1,59 @@
+﻿@page
+@model pecacompativel.web.ModeloModel
+@{
+    ViewData["Title"] = "Modelo";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<!-- Falta colocar o breadcrumb... -->
+<div id="app" class="container" v-cloak>
+    <h3>{{ modelo.marcaNome + ' ' + modelo.nome }}</h3>
+    <!-- <div class="text-center">
+       <img src="next250.png" class="img-fluid rounded" alt="Dafra - Next 250">
+       </div>
+    -->
+    <table class="table table-striped" a v-if="pecasAlternativas && pecasAlternativas.length > 0">
+        <thead>
+            <tr>
+                <th scope="col">Peça</th>
+                <th scope="col">Compatível</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <!-- Layout JSON:
+                [ { "id": "5e489a01f5e1034d10a2915d", "marca": "ADLY", "modelo": "ATV 50", "ano": "2000", "pecaNome": "Filtro de Gasolina", "observacao": "filtro de gasolina.", "dataCriacao": "2020-02-16T01:25:21.745Z", "dataAlteracao": "2020-02-16T01:25:21.745Z", "modeloOrigem": "5e483e066b8aa84b7c17204a" } ]
+             -->
+            <tr v-for="pecaAlternativa in pecasAlternativas">
+                <td>{{ pecaAlternativa.pecaNome }}</td>
+                <td>{{ pecaAlternativa.marca + ' - ' + pecaAlternativa.modelo + ' (' + pecaAlternativa.ano + ')' }}</td><!-- Honda Twister (N/E) --->
+                <td class="text-right">
+                    <button class="btn btn-md"><i class="fa fa-thumbs-up"></i> <span class="badge badge-secondary">88</span></button>
+                    <button class="btn btn-md"><i class="fa fa-thumbs-down"></i> <span class="badge badge-secondary">15</span></button>
+                    <button class="btn btn-md" data-toggle="collapse" data-target="#collapseExample"><i class="fa fa-comment"></i> <span class="badge badge-secondary">5</span></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="text-center" v-if="pecasAlternativas && pecasAlternativas.length <= 0">
+        <br />
+        <br />
+        <em>Nenhuma peça alternativa cadastrada. Seja o primeiro!</em>
+        <br />
+        <br />
+    </div>
+    <div>
+        <button type="button" onclick="javascript:history.back();" class="btn btn-secondary">Voltar</button>
+        @*mo-{id}/{marca}/{modelo}/peca-alternativa*@
+        <a v-if="modelo.marcaNome" :href="'/mo-' + modelo.id + '/' + modelo.marcaNome + '/' + modelo.nome + '/peca-alternativa'">
+            <button type="button" class="btn btn-dark">Adicionar Peça Alternativa</button>
+        </a>
+    </div>
+    <br />
+</div>
+
+@section Scripts
+{
+    <script src="~/js/modelo.vue.js" asp-append-version="true"></script>
+}

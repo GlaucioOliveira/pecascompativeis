@@ -1,0 +1,69 @@
+﻿@page
+@model pecacompativel.web.CadastrarPecaModel
+@{
+    ViewData["Title"] = "- Cadastrar Peça Alternativa";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div id="app" class="container" v-cloak>
+    <form>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Marca</label>
+            <select class="form-control" id="exampleFormControlSelect1" v-model="marcaSelecionada" @@change="atualizaReferencias">
+                <option v-for="(item, index) in marcas" :value="item">{{ item.nome }}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Modelo</label>
+            <select class="form-control" id="exampleFormControlSelect1" v-model="modeloSelecionado" @@change="atualizaReferenciasAnos">
+                <option v-for="(modelo, index) in marcaSelecionada.modelo" :value="modelo">{{ modelo.nome }}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Ano</label>
+            <select class="form-control" id="exampleFormControlSelect1" v-model="anoSelecionado" @@change="atualizaAnoSelecionado">
+                <option></option>
+                <option v-for="ano in AnosModeloSelecionado" :value="ano">{{ ano }}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Peça</label>
+            <select class="form-control" id="exampleFormControlSelect1" v-model="novaPeca.PecaNome">
+                <option selected></option>
+                <option>Filtro de Ar Esportivo</option>
+                <option>Filtro de Gasolina</option>
+                <option>Disco de Embreagem</option>
+                <option>Filtro de Óleo</option>
+                <option>Caixa de Direção</option>
+                <option>Suspensão Dianteira</option>
+                <option>Suspensão Traseira</option>
+            </select>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="chkNecessitaAdaptacao" v-model="novaPeca.NecessitaAdaptacao">
+            <label for="chkNecessitaAdaptacao">Necessita de Adaptação (N/A)</label>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Observação</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="" rows="2" v-model="novaPeca.Observacao"></textarea>
+        </div>
+    </form>
+
+    <div>
+        <button type="button" onclick="javascript:history.back();" class="btn btn-secondary">Voltar</button>
+        <button type="button" class="btn btn-dark" v-if="!enviado" v-on:click="enviarPecaAlternativa"><i class="fa fa-check" v-if="enviado && redirecionando"></i> Salvar</button>
+        <button class="btn btn-dark" type="button" disabled v-if="enviado">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Salvando...
+        </button>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/js/cadastrar-peca.vue.js" asp-append-version="true"></script>
+}
