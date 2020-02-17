@@ -38,12 +38,12 @@
   <!-- {{pecasAlternativas}} -->
 
      <div class="container">
-
-      <div class="text-center">
+      <h3>{{ modelo.marcaNome + ' ' + modelo.nome }}</h3>
+      <!-- <div class="text-center">
       <img src="next250.png" class="img-fluid rounded" alt="Dafra - Next 250">
       </div>  
-  
-    <table class="table table-striped">
+   -->
+    <table class="table table-striped"a v-if="pecasAlternativas && pecasAlternativas.length > 0">
       <thead>
         <tr>
           <th scope="col">Peça</th>
@@ -66,7 +66,13 @@
         </tr>   
       </tbody>
     </table>
-
+    <div class="text-center" v-if="pecasAlternativas && pecasAlternativas.length <= 0">
+      <br/>
+      <br/>
+      <em>Nenhuma peça alternativa cadastrada. Seja o primeiro!</em>
+      <br/>
+      <br/>
+    </div>
     <div>
       <button type="button" onclick="javascript:history.back();" class="btn btn-secondary">Voltar</button>
 
