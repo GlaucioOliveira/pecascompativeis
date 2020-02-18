@@ -29,3 +29,16 @@ $(document).ready(function () {
 		return false;
 	});
 });
+
+//Vue Global Filters
+Vue.filter('friendlyURL', function (value) {
+	if (!value) return '';
+
+	value = value.toString().toLowerCase();
+
+	value = value.replace(/\s/gi, '-'); //substituir espaços em branco por '-'
+	//value = value.replace(/\//gi, '-'); //subsituir barras '/' por '-'
+	//value = value.replace(/\\/gi, '-'); //subsituir barras '\' por '-'
+
+	return value;
+});
