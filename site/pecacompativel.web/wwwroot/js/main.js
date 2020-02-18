@@ -1,4 +1,10 @@
 ﻿/* Função para controlar o #back-to-top*/
+
+//Define the Root of the API to be consumed;
+var apiURL = function () {
+	return "https://localhost:44300/";
+};
+
 var IdPagina = function () {
 	var urlAddress = window.location.pathname;
 	var firstSlashPosition = urlAddress.indexOf("/");

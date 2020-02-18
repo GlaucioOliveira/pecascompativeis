@@ -7,7 +7,7 @@
 
     mounted() {
         var id = IdPagina();
-        axios.get("https://localhost:44300/marca/" + id)
+        axios.get(apiURL() + "marca/" + id)
             .then(response => (this.marca = response.data));
     },
 
@@ -36,7 +36,7 @@ var appBreadcrumb = new Vue({
 
     mounted() {
         var id = IdPagina();
-        axios.get("https://localhost:44300/marca/" + id)
+        axios.get(apiURL() + "marca/" + id)
             .then(response => (this.marca = response.data));
     }
 });

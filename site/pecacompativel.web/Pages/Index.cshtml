@@ -15,14 +15,17 @@
                     {{ marca.nome }}
                 </div>
                 <ul v-for="modelo in marca.modelo.slice(0,5)" class="list-group list-group-flush">
-                    @*'/mo-' + modelo.id + '/' + marca.nome.toLowerCase() + '/' + modelo.nome.toLowerCase().replace(' ','-')*@
-                    <li class="list-group-item"><a :href="'/mo-' + modelo.id + '/' + marca.nome.toLowerCase() + '/' + modelo.nome.toLowerCase().replace(' ','-')">{{ modelo.nome.substring(0,30) }}</a> <span class="badge badge-secondary float-right">15 Peças</span></li>
+                    <li class="list-group-item">
+                        <a :href="'/mo-' + modelo.id + '/' + marca.nome.toLowerCase() + '/' + modelo.nome.toLowerCase().replace(' ','-')">{{ modelo.nome.substring(0,30) }}</a>
+                        <span class="badge badge-secondary float-right">{{ pegaQuantidade(modelo.id) }} Peça(s)</span>
+                    </li>
                 </ul>
                 <div class="card-footer">
                     <small class="text-muted"><a :href="'/ma-' + marca.id + '/' + marca.nome.toLowerCase()">Ver Todos os Modelos da {{ marca.nome }}</a></small>
                 </div>
             </div>
         </div>
+        <!-- Vue.JS App -->
     </div>
 </div>
 

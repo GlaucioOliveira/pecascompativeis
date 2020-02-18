@@ -3,5 +3,37 @@
 - passar o ID da marca onde está sendo cadastrado uma peça alternativa;		OK
 - alterar carga para salvar ID das marcas no MongoDB;				OK
 - na tela de lista da marca, listar as peças alternativas cadastradas;		OK
-- criar estrutura social (curtidas, comentários) para uma marca;		
+
+
+
+13:51 18/02/2020
+Site
+- Criar esquema de autenticação (oAuth?);
+- Habilitar CORS apenas para o domínio goliveira.com;
+
+Busca
+- Criar página de busca;
+- Habilitar a busca na masterpage;
+
+Index
+- atualizar badge para listar a quantidade de peças cadastradas nos modelos de uma marca; (Criar estrutura em banco para representar essa informação)	OK
+- ordenar a lista pelos itens mais visualizados, depois com mais peças cadastradas; TODO
+- 
+
+Marca
+- ordernar a lista por popularidade, ou por modelos onde tenham peças alternativas (enchugaria o layout...)
+- ajustar breadcrumb
+- habilitar ordenação (+)
+
+
+Modelo
+- ajustar breadcrumb
+- habilitar ordenação (+)
+- criar layout para curtida (positiva e negativa) e comentários.
+
+Modelo > Cadastro
+- Requisitar ao usuário um Login (Facebook ou Google Account) ou cadastrar um e-mail;
+- Colocar combo com filtro para facilitar a seleção;
+- Criar validações no cliente e no backend;
+
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using pecacompativel.db.Models;
 using MongoDB.Driver;
+using MongoDB.Bson;
 
 namespace pecacompativel.db.Services
 {
@@ -25,6 +26,21 @@ namespace pecacompativel.db.Services
         public List<Peca> ListarPecasAlternativas(string ModeloOrigem)
         {
             return _pecas.Find(x => x.ModeloOrigem == ModeloOrigem).ToList();
+        }
+
+        public List<PecaQuantidadePorModelo> ListarQuantidadePecasAlternativas()
+        {
+            //agrupa a lista de peças cadastradas pelo id do Modelo,
+            //e traz a quantidade somada de registros.
+            var listaQuantidadePecasPorModelo = _pecas.Aggregate()
+                           .Group(x => x.ModeloOrigem,
+                           g => new PecaQuantidadePorModelo()
+                           {
+                               ModeloOrigem = g.Key,
+                               ContagemPecas = g.Select(x=> x.ModeloOrigem).Count()
+                           }).ToList();
+
+            return listaQuantidadePecasPorModelo;
         }
 
         public Peca Get(string id) =>

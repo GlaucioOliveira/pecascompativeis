@@ -29,7 +29,11 @@ namespace pecacompativel.web
                     x.Conventions.AddPageRoute("/Marca", "ma-{id}/{marca}");
                     x.Conventions.AddPageRoute("/Modelo", "mo-{id}/{marca}/{modelo}");
                     x.Conventions.AddPageRoute("/CadastrarPeca", "mo-{id}/{marca}/{modelo}/peca-alternativa");
-                });
+                })
+
+                //Explicação em => https://docs.microsoft.com/en-us/aspnet/core/mvc/views/view-compilation?view=aspnetcore-3.0#runtime-compilation
+                .AddRazorRuntimeCompilation(); 
+            ;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

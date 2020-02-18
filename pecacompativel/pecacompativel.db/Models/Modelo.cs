@@ -19,5 +19,7 @@ namespace pecacompativel.db.Models
 
         public string MarcaNome { get; set; }
         public string MarcaId { get; set; }
+        [BsonIgnore]
+        public int QuantidadeDePecas { get; set; }
     }
 }

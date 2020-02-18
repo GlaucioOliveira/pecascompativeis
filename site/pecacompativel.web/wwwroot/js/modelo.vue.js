@@ -10,14 +10,9 @@
 
     methods: {
         atualizaListaPecasAlternativas: function () {
-            axios.get("https://localhost:44300/peca/ListarPecasAlternativas/" + this.id)
+            axios.get(apiURL() + "peca/ListarPecasAlternativas/" + this.id)
                 .then(response => {
                     this.pecasAlternativas = response.data;
-
-                    //if (this.mounted !== undefined && this.mounted.listaPecasAlternativasFiltro !== undefined)
-                    //{
-                    //    let x = this.mounted.listaPecasAlternativasFiltro.length;
-                    //}
                 });
         },
 
@@ -26,7 +21,7 @@
         },
 
         removerPecaAlternativa: function () {
-            axios.delete("https://localhost:44300/peca/" + this.pecaAlternativaParaRemover)
+            axios.delete(apiURL() + "peca/" + this.pecaAlternativaParaRemover)
                 .then(response => {
                     this.atualizaListaPecasAlternativas();
                     $('#modalPromptExclusao').modal('hide');
@@ -37,7 +32,7 @@
     mounted() {
         var Id = IdPagina();
         this.id = Id;
-        axios.get("https://localhost:44300/modelo/" + Id)
+        axios.get(apiURL() + "modelo/" + Id)
             .then(response => (this.modelo = response.data));
 
         this.atualizaListaPecasAlternativas();
@@ -68,7 +63,7 @@ var appBreadcrumb = new Vue({
 
     mounted() {
         var id = IdPagina();
-        axios.get("https://localhost:44300/modelo/" + id)
+        axios.get(apiURL() + "modelo/" + id)
             .then(response => (this.modelo = response.data));
     }
 });

@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using pecacompativel.db.Services;
 using pecacompativel.db.Models;
 using Microsoft.AspNetCore.Cors;
+using System.Net.Http;
+using System.Text;
 
 namespace pecacompativel.api.Controllers
 {
@@ -42,6 +44,12 @@ namespace pecacompativel.api.Controllers
         public ActionResult<List<Peca>> ListarPecasAlternativas(string modelo)
         {
             return _pecaService.ListarPecasAlternativas(modelo);
+        }
+
+        [HttpGet("ListarQuantidadePecasAlternativas")]
+        public ActionResult<List<PecaQuantidadePorModelo>> ListarQuantidadePecasAlternativas()
+        {
+            return _pecaService.ListarQuantidadePecasAlternativas();
         }
 
         [HttpPost]
