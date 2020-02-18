@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace pecacompativel.web
 {
-    public class CadastrarPecaModel : PageModel
+    public class Modelo_CadastrarPecaModel : PageModel
     {
         public void OnGet()
         {

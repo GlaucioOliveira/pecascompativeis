@@ -4,7 +4,8 @@
         modelo: [],
         pecasAlternativas: [],
         filtroTabela: '',
-        id: ''
+        id: '',
+        pecaAlternativaParaRemover: ''
     },
 
     methods: {
@@ -12,15 +13,23 @@
             axios.get("https://localhost:44300/peca/ListarPecasAlternativas/" + this.id)
                 .then(response => {
                     this.pecasAlternativas = response.data;
-                    let x = this.computed.listaPecasAlternativasFiltro();
+
+                    //if (this.mounted !== undefined && this.mounted.listaPecasAlternativasFiltro !== undefined)
+                    //{
+                    //    let x = this.mounted.listaPecasAlternativasFiltro.length;
+                    //}
                 });
         },
 
-        removerPecaAlternativa: function (idPeca) {
-            axios.delete("https://localhost:44300/peca/" + idPeca)
+        escolherPecaAlternativaParaRemover: function (idPeca) {
+            this.pecaAlternativaParaRemover = idPeca;
+        },
+
+        removerPecaAlternativa: function () {
+            axios.delete("https://localhost:44300/peca/" + this.pecaAlternativaParaRemover)
                 .then(response => {
-                    this.pecasAlternativas = response.data;
                     this.atualizaListaPecasAlternativas();
+                    $('#modalPromptExclusao').modal('hide');
                 });
         }
     },

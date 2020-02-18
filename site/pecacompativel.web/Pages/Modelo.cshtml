@@ -12,6 +12,7 @@
 }
 
 <div id="app" class="container" v-cloak>
+    <!-- VueJS App -->
     <h3>{{ modelo.marcaNome + ' ' + modelo.nome }}</h3>
     <form class="form-inline">
         <div class="input-group">
@@ -33,16 +34,26 @@
         <tbody>
 
             <!-- Layout JSON:
-                [ { "id": "5e489a01f5e1034d10a2915d", "marca": "ADLY", "modelo": "ATV 50", "ano": "2000", "pecaNome": "Filtro de Gasolina", "observacao": "filtro de gasolina.", "dataCriacao": "2020-02-16T01:25:21.745Z", "dataAlteracao": "2020-02-16T01:25:21.745Z", "modeloOrigem": "5e483e066b8aa84b7c17204a" } ]
+
+                [ { "id": "5e489a01f5e1034d10a2915d", "marca": "ADLY", "modelo": "ATV 50", "ano": "2000", "pecaNome": "Filtro de Gasolina",
+                    "observacao": "filtro de gasolina.", "dataCriacao": "2020-02-16T01:25:21.745Z", "dataAlteracao": "2020-02-16T01:25:21.745Z",
+                    "modeloOrigem": "5e483e066b8aa84b7c17204a"
+                } ]
+
              -->
-            <tr v-for="pecaAlternativa in listaPecasAlternativasFiltro">
+            <tr v-for="pecaAlternativa in pecasAlternativas">
                 <td>{{ pecaAlternativa.pecaNome }}</td>
-                <td>{{ pecaAlternativa.marca + ' - ' + pecaAlternativa.modelo + ' (' + pecaAlternativa.ano + ')' }}</td><!-- Honda Twister (N/E) --->
+                <td>
+                    {{ pecaAlternativa.marca + ' - ' + pecaAlternativa.modelo + ' (' + pecaAlternativa.ano + ')' }} <label v-if="pecaAlternativa.necessitaAdaptacao">(NA)</label>
+                    <div v-if="pecaAlternativa.observacao.length > 0">
+                        {{pecaAlternativa.observacao}}
+                    </div>
+                </td><!-- Honda Twister (N/E) --->
                 <td class="text-right">
                     <button class="btn btn-md"><i class="fa fa-thumbs-up"></i> <span class="badge badge-secondary">88</span></button>
                     <button class="btn btn-md"><i class="fa fa-thumbs-down"></i> <span class="badge badge-secondary">15</span></button>
                     <button class="btn btn-md" data-toggle="collapse" data-target="#collapseExample"><i class="fa fa-comment"></i> <span class="badge badge-secondary">5</span></button>
-                    <button class="btn btn-md" v-on:click="removerPecaAlternativa(pecaAlternativa.id)"><i class="fa fa-trash"></i> </button>
+                    <button class="btn btn-md" data-toggle="modal" data-target="#modalPromptExclusao" v-on:click="escolherPecaAlternativaParaRemover(pecaAlternativa.id)"><i class="fa fa-trash"></i> </button>
                 </td>
             </tr>
         </tbody>
@@ -59,80 +70,18 @@
         <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalCadastro">Cadastrar Peça</button>
     </div>
     <br />
-</div>
 
-<!-- Modal Cadastrar Peça Alternativa-->
-<div id="cadastro">
-    <div class="modal fade" id="modalCadastro" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalScrollableTitle">Cadastrar Peça</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">Marca</label>
-                            <select class="form-control" id="exampleFormControlSelect1" v-model="marcaSelecionada" @@change="atualizaReferencias">
-                                <option v-for="(item, index) in marcas" :value="item">{{ item.nome }}</option>
-                            </select>
-                        </div>
+    <partial>
+        @Html.Partial("_modalPromptExclusao", new _modalPromptExclusaoModel() { OnClickEvent = "removerPecaAlternativa()" })
+    </partial>
+</div> <!-- VueJS App -->
 
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">Modelo</label>
-                            <select class="form-control" id="exampleFormControlSelect1" v-model="modeloSelecionado" @@change="atualizaReferenciasAnos">
-                                <option v-for="(modelo, index) in marcaSelecionada.modelo" :value="modelo">{{ modelo.nome }}</option>
-                            </select>
-                        </div>
+<partial>
+    @* Adicionando o Modal de Cadastro de Peça *@
+    @Html.Partial("Modelo_CadastrarPeca", new Modelo_CadastrarPecaModel())
+</partial>
 
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">Ano</label>
-                            <select class="form-control" id="exampleFormControlSelect1" v-model="anoSelecionado" @@change="atualizaAnoSelecionado">
-                                <option></option>
-                                <option v-for="ano in AnosModeloSelecionado" :value="ano">{{ ano }}</option>
-                            </select>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">Peça</label>
-                            <select class="form-control" id="exampleFormControlSelect1" v-model="novaPeca.PecaNome">
-                                <option selected></option>
-                                <option>Filtro de Ar Esportivo</option>
-                                <option>Filtro de Gasolina</option>
-                                <option>Disco de Embreagem</option>
-                                <option>Filtro de Óleo</option>
-                                <option>Caixa de Direção</option>
-                                <option>Suspensão Dianteira</option>
-                                <option>Suspensão Traseira</option>
-                            </select>
-                        </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="chkNecessitaAdaptacao" v-model="novaPeca.NecessitaAdaptacao">
-                            <label for="chkNecessitaAdaptacao">Necessita de Adaptação (N/A)</label>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Observação</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="" rows="2" v-model="novaPeca.Observacao"></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
-                    <button type="button" class="btn btn-dark" v-if="!enviado" v-on:click="enviarPecaAlternativa"><i class="fa fa-check" v-if="enviado && redirecionando"></i> Salvar</button>
-                    <button class="btn btn-dark" type="button" disabled v-if="enviado">
-                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                        Salvando...
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Modal Cadastrar Peça Alternativa-->
 @section Scripts
 {
     <script src="~/js/modelo.vue.js" asp-append-version="true"></script>

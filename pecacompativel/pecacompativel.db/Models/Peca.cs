@@ -24,5 +24,6 @@ namespace pecacompativel.db.Models
         public DateTime DataAlteracao { get; set; }
 
         public string  ModeloOrigem { get; set; }
+        public bool NecessitaAdaptacao { get; set; }
     }
 }
