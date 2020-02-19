@@ -50,9 +50,9 @@
                     </div>
                 </td><!-- Honda Twister (N/E) --->
                 <td class="text-right">
-                    <button class="btn btn-md"><i class="fa fa-thumbs-up"></i> <span class="badge badge-secondary">88</span></button>
-                    <button class="btn btn-md"><i class="fa fa-thumbs-down"></i> <span class="badge badge-secondary">15</span></button>
-                    <button class="btn btn-md" data-toggle="collapse" data-target="#collapseExample"><i class="fa fa-comment"></i> <span class="badge badge-secondary">5</span></button>
+                    <button class="btn btn-md" v-on:click="curtirPecaAlternativa(pecaAlternativa.id)"><i class="fa fa-thumbs-up"></i> <span class="badge badge-secondary">{{ pecaAlternativa.quantidadeAprovacao }}</span></button>
+                    <button class="btn btn-md" v-on:click="reprovarPecaAlternativa(pecaAlternativa.id)"><i class="fa fa-thumbs-down"></i> <span class="badge badge-secondary">{{ pecaAlternativa.quantidadeReprovacao }}</span></button>
+                    <button class="btn btn-md" data-toggle="collapse" data-target="#collapseExample"><i class="fa fa-comment"></i> <span class="badge badge-secondary">0</span></button>
                     <button class="btn btn-md" data-toggle="modal" data-target="#modalPromptExclusao" v-on:click="escolherPecaAlternativaParaRemover(pecaAlternativa.id)"><i class="fa fa-trash"></i> </button>
                 </td>
             </tr>

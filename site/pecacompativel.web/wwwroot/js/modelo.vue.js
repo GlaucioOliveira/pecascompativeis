@@ -26,6 +26,20 @@
                     this.atualizaListaPecasAlternativas();
                     $('#modalPromptExclusao').modal('hide');
                 });
+        },
+
+        curtirPecaAlternativa: function (idPeca) {
+            axios.put(apiURL() + "peca/Curtida/" + idPeca)
+                .then(response => {
+                    this.atualizaListaPecasAlternativas();
+                });
+        },
+
+        reprovarPecaAlternativa: function (idPeca) {
+            axios.put(apiURL() + "peca/Reprovacao/" + idPeca)
+                .then(response => {
+                    this.atualizaListaPecasAlternativas();
+                });
         }
     },
 

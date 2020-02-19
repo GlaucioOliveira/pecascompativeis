@@ -43,7 +43,8 @@ namespace pecacompativel.api.Controllers
         [HttpGet("ListarPecasAlternativas/{modelo}")]
         public ActionResult<List<Peca>> ListarPecasAlternativas(string modelo)
         {
-            return _pecaService.ListarPecasAlternativas(modelo);
+            var lista = _pecaService.ListarPecasAlternativas(modelo);
+            return lista;
         }
 
         [HttpGet("ListarQuantidadePecasAlternativas")]
@@ -59,6 +60,28 @@ namespace pecacompativel.api.Controllers
             peca.DataAlteracao = peca.DataCriacao;
 
             _pecaService.Create(peca);
+            return CreatedAtRoute("GetPeca", new { id = peca.Id.ToString() }, peca);
+        }
+
+        [HttpPut("Curtida/{id}")]
+        public ActionResult<Peca> Curtida(string id)
+        {
+            //precisa ter validação para não permitir um usuário logado curtir mais de uma vez
+            var peca = _pecaService.Get(id);
+            peca.QuantidadeAprovacao += 1;
+            _pecaService.Update(id, peca);
+
+            return CreatedAtRoute("GetPeca", new { id = peca.Id.ToString() }, peca);
+        }
+
+        [HttpPut("Reprovacao/{id}")]
+        public ActionResult<Peca> Reprovacao(string id)
+        {
+            //precisa ter validação para não permitir um usuário logado curtir mais de uma vez
+            var peca = _pecaService.Get(id);
+            peca.QuantidadeReprovacao += 1;
+            _pecaService.Update(id, peca);
+
             return CreatedAtRoute("GetPeca", new { id = peca.Id.ToString() }, peca);
         }
 

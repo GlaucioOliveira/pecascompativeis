@@ -27,5 +27,7 @@ namespace pecacompativel.db.Models
         
         [BsonIgnore]
         public int QuantidadePecas { get; set; }
+        public int QuantidadeAprovacao { get; set; }
+        public int QuantidadeReprovacao { get; set; }
     }
 }
