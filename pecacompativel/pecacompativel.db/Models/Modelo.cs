@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using pecacompativel.db.Util;
 
 namespace pecacompativel.db.Models
 {
@@ -21,5 +21,18 @@ namespace pecacompativel.db.Models
         public string MarcaId { get; set; }
         [BsonIgnore]
         public int QuantidadeDePecas { get; set; }
+
+        [BsonIgnore]
+        public string FriendlyUrl
+        {
+            get
+            {
+                if(string.IsNullOrWhiteSpace(MarcaNome))
+                {
+
+                }
+                return $@"mo-{Id}/{StringUtil.GetFriendlyName(MarcaNome)}/{StringUtil.GetFriendlyName(Nome)}";
+            }
+        }
     }
 }

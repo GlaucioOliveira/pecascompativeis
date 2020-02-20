@@ -22,12 +22,13 @@ namespace pecacompativel.db.Models
         public string Observacao { get; set; }
         public DateTime DataCriacao { get; set; }
         public DateTime DataAlteracao { get; set; }
-        public string  ModeloOrigem { get; set; }
+        public string ModeloOrigem { get; set; }
         public bool NecessitaAdaptacao { get; set; }
-        
+
         [BsonIgnore]
         public int QuantidadePecas { get; set; }
         public int QuantidadeAprovacao { get; set; }
         public int QuantidadeReprovacao { get; set; }
+
     }
 }

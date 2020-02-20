@@ -50,8 +50,7 @@ namespace pecacompativel.cli
                         MarcaId = marca.Id,
                         MarcaNome = marca.Nome
                     };
-
-                    //cadastra no banco um novo modelo.
+                     //cadastra no banco um novo modelo.
                     modelodb.Create(novoModelo);
 
                     marca.Modelo.Add(new Modelo()

@@ -29,7 +29,8 @@ Marca
 Modelo
 - ajustar breadcrumb
 - habilitar ordenação (+)
-- criar layout para curtida (positiva e negativa) e comentários.
+- criar layout para curtida (positiva e negativa) - OK
+- criar layout para comentários
 
 Modelo > Cadastro
 - Requisitar ao usuário um Login (Facebook ou Google Account) ou cadastrar um e-mail;
