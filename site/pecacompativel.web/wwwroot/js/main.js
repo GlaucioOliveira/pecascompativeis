@@ -2,7 +2,7 @@
 
 //Define the Root of the API to be consumed;
 var apiURL = function () {
-	return "https://localhost:44300/";
+	return "https://goliveira.com/dev/"; //"https://localhost:44300/";
 };
 
 var IdPagina = function () {
