@@ -16,12 +16,12 @@
                 </div>
                 <ul v-for="modelo in marca.modelo.slice(0,5)" class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <a :href="'/' + modelo.friendlyUrl">{{ modelo.nome.substring(0,30) }}</a>
+                        <a :href="'' + modelo.friendlyUrl">{{ modelo.nome.substring(0,30) }}</a>
                         <span class="badge badge-secondary float-right">{{ pegaQuantidade(modelo.id) }} Peça(s)</span>
                     </li>
                 </ul>
                 <div class="card-footer">
-                    <small class="text-muted"><a :href="'/' + marca.friendlyUrl">Ver Todos os Modelos da {{ marca.nome }}</a></small>
+                    <small class="text-muted"><a :href="'' + marca.friendlyUrl">Ver Todos os Modelos da {{ marca.nome }}</a></small>
                 </div>
             </div>
         </div>
