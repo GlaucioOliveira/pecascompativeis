@@ -57,21 +57,24 @@ namespace pecacompativel.cli
                     {
                         Id = novoModelo.Id,
                         Nome = modelo.Modelo.Trim(),
-                        Ano = modelo.Ano
+                        Ano = modelo.Ano,
+                        MarcaNome = marca.Nome
                     });
                 }
 
                 //cadastro de marcas;
                 marcadb.Create(marca);
 
-                //TODO: Refatorar esse código. tá bem amador...
                 foreach (var modelo in marca.Modelo)
                 {
-                    var modeloParaEditar = modelodb.Get(modelo.Id);
-                    modeloParaEditar.MarcaId = marca.Id;
+                    //var modeloParaEditar = modelodb.Get(modelo.Id);
+                    modelo.MarcaId = marca.Id;
+                    modelo.MarcaNome = marca.Nome;
 
-                    modelodb.Update(modeloParaEditar.Id, modeloParaEditar);
+                    //modelodb.Update(modeloParaEditar.Id, modeloParaEditar);
                 }
+
+                marcadb.Update(marca.Id, marca);
             }
 
             Console.WriteLine("\n> Pressione uma Tecla para Encerrar... ");
@@ -134,26 +137,29 @@ namespace pecacompativel.cli
         /// </summary>
         static void carregaServices()
         {
+            //mongodb://localhost:27017
+            string ConnectionString = "mongodb://127.0.0.1:1234/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
+
             dbConnection = new PecaCompativelDatabaseSettings()
             {
                 DatabaseName = "pecacompativel",
-                ConnectionString = "mongodb://localhost:27017",
+                ConnectionString = ConnectionString,
                 PecaCollectionName = "pecacompativel"
             };
-
+            
             pecadb = new PecaService(dbConnection);
 
             marcadb = new MarcaService(new PecaCompativelDatabaseSettings()
             {
                 DatabaseName = "pecacompativel",
-                ConnectionString = "mongodb://localhost:27017",
+                ConnectionString = ConnectionString,
                 MarcaCollectionName = "marca"
             });
 
             modelodb = new ModeloService(new PecaCompativelDatabaseSettings()
             {
                 DatabaseName = "pecacompativel",
-                ConnectionString = "mongodb://localhost:27017",
+                ConnectionString = ConnectionString,
                 ModeloCollectionName = "modelo"
             });
         }
