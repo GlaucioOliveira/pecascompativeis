@@ -51,6 +51,8 @@ namespace pecacompativel.api
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UsePathBase("/dev");
+
             //app.UseCors( b =>
             //{
             //    b.WithOrigins("http://127.0.0.1:5500/", "http://localhost/");
@@ -58,7 +60,7 @@ namespace pecacompativel.api
             //app.UseCors(x => x.AllowAnyHeader());
             //app.UseCors(x => x.AllowAnyMethod());
             //app.UseCors(option => option.AllowAnyOrigin());
-            
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
