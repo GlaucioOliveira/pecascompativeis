@@ -40,7 +40,7 @@ namespace pecacompativel.web
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             //habilitar a linha abaixo caso seja feito o deploy em um diretório.
-            //app.UsePathBase("/pecacompativel");
+            app.UsePathBase("/pecacompativel");
 
             if (env.IsDevelopment())
             {
