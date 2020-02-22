@@ -8,7 +8,8 @@
     },
     methods: {
         pegaQuantidade: function (modelo) {
-
+            //lista a quantidade de peças alternativas cadastradas para um
+            //modelo de moto.
             if (modelo !== undefined && this.listaQuantidadePecas !== undefined) {
                 let tmpItem = this.listaQuantidadePecas.filter(function (item) {
                     return item.modeloOrigem === modelo;
