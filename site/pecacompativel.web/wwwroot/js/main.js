@@ -6,7 +6,8 @@ var apiURL = function () {
 };
 
 var IdPagina = function () {
-	var urlAddress = window.location.pathname;
+    var urlAddress = window.location.pathname;
+    urlAddress = urlAddress.replace("/pecacompativel", "");
 	var firstSlashPosition = urlAddress.indexOf("/");
 	var secondSlashPosition = urlAddress.indexOf("/", firstSlashPosition + 1);
 	var _id = urlAddress.substring(firstSlashPosition + 1 + 3, secondSlashPosition);
