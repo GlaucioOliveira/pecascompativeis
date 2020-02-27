@@ -5,9 +5,8 @@
 }
 
 <div class="container">
-    <h5>Marcas e Modelos populares:</h5>
-
     <div id="app" v-cloak>
+        <h5>Marcas e Modelos populares:</h5>
         <!-- Vue.JS App -->
         <div class="card-deck p-3" v-for="deck in decks">
             <div class="card" v-for="marca in marcasPopulares.slice(deck.start, deck.end)">
