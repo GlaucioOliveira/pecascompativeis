@@ -2,7 +2,8 @@
 
 //Define a Raiz da API para ser consumida.
 var apiURL = function () {
-	return "https://goliveira.com/dev/"; //"https://localhost:44300/";
+	//return "https://goliveira.com/dev/"; 
+	return "https://localhost:44300/";
 };
 
 //obtem o id do registro na página atual.
